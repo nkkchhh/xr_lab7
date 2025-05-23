@@ -21,7 +21,7 @@
     camera-controls 
     touch-action="pan-y" 
     autoplay 
-    animation-name="anim1"  <!-- Установлена начальная анимация -->
+    animation-name="Running"  <!-- Установлена начальная анимация -->
     poster="poster.webp" 
     shadow-intensity="1" 
     src="anim4.glb"  <!-- Один файл модели с несколькими анимациями -->
@@ -44,7 +44,7 @@
             ? 'Running' 
             : 'Waiting';
           modelViewer.play();  // Явно запускаем анимацию
-        }, 1500);
+        }, 1500.0);
       });
     })();
   </script>
