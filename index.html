@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+  <style>
+    body { margin: 0; }
+    model-viewer {
+      width: 100%;
+      height: 100vh;
+    }
+    .ar-button {
+      justify-content: center;
+      align-items: center;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #4285f4;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 30px;
+    }
+  </style>
+</head>
+<body>
+  <model-viewer src="anim1.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls touch-action="pan-y" poster="poster.webp" shadow-intensity="1" autoplay ar ar-modes="webxr scene-viewer">
+    <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+    </div>
+    <button slot="ar-button" id="ar-button">
+        View in your space
+    </button>
+    <div id="ar-prompt">
+        <img src="https://modelviewer.dev/shared-assets/icons/hand.png">
+    </div>
+</model-viewer>
+</body>
+</html>
