@@ -24,16 +24,18 @@
   </style>
 </head>
 <body>
-  <model-viewer src="anim1.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls touch-action="pan-y" poster="poster.webp" shadow-intensity="1" autoplay ar ar-modes="webxr scene-viewer">
-    <div class="progress-bar hide" slot="progress-bar">
-        <div class="update-bar"></div>
-    </div>
-    <button slot="ar-button" id="ar-button">
-        View in your space
-    </button>
-    <div id="ar-prompt">
-        <img src="https://modelviewer.dev/shared-assets/icons/hand.png">
-    </div>
+  <model-viewer id="paused-change-demo" ar ar-modes="webxr scene-viewer quick-look" camera-controls touch-action="pan-y" autoplay animation-name="Running" poster="poster.webp" shadow-intensity="1" autoplay ar ar-modes="webxr scene-viewer" src="anim2.glb" alt="anim1.glb">
+
 </model-viewer>
+  <script>
+                  (() => {
+                    const modelViewer = document.querySelector('#paused-change-demo');
+
+                    self.setInterval(() => {
+                      modelViewer.animationName = modelViewer.animationName === 'Running' ?
+                        'Wave' : 'Running';
+                    }, 1500.0);
+                  })();
+                </script>
 </body>
 </html>
