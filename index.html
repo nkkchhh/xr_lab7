@@ -9,33 +9,44 @@
       width: 100%;
       height: 100vh;
     }
-    .ar-button {
-      justify-content: center;
-      align-items: center;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #4285f4;
-      color: white;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 30px;
+    
     }
   </style>
 </head>
 <body>
-  <model-viewer id="paused-change-demo" ar ar-modes="webxr scene-viewer quick-look" camera-controls touch-action="pan-y" autoplay animation-name="Running" poster="poster.webp" shadow-intensity="1" autoplay ar ar-modes="webxr scene-viewer" src="anim2.glb" alt="anim1.glb">
+  <model-viewer 
+    id="paused-change-demo" 
+    ar 
+    ar-modes="webxr scene-viewer quick-look" 
+    camera-controls 
+    touch-action="pan-y" 
+    autoplay 
+    animation-name="anim1"  <!-- Установлена начальная анимация -->
+    poster="poster.webp" 
+    shadow-intensity="1" 
+    src="anim4.glb"  <!-- Один файл модели с несколькими анимациями -->
+    alt="3D Model"
+  >
+  </model-viewer>
 
-</model-viewer>
   <script>
-                  (() => {
-                    const modelViewer = document.querySelector('#paused-change-demo');
-
-                    self.setInterval(() => {
-                      modelViewer.animationName = modelViewer.animationName === 'anim1' ?
-                        'anim2' : 'anim1';
-                    }, 1500.0);
-                  })();
-                </script>
+    (() => {
+      const modelViewer = document.querySelector('#paused-change-demo');
+      
+      // Ждем загрузки модели
+      modelViewer.addEventListener('load', () => {
+        // Проверяем доступные анимации
+        console.log('Доступные анимации:', modelViewer.availableAnimations);
+        
+        // Запускаем переключение каждые 1.5 секунды
+        self.setInterval(() => {
+          modelViewer.animationName = modelViewer.animationName === 'Waiting' 
+            ? 'Running' 
+            : 'Waiting';
+          modelViewer.play();  // Явно запускаем анимацию
+        }, 1500);
+      });
+    })();
+  </script>
 </body>
 </html>
