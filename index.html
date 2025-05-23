@@ -17,23 +17,14 @@
   <model-viewer id="paused-change-demo" ar ar-modes="webxr scene-viewer quick-look" camera-controls touch-action="pan-y" autoplay animation-name="Running" poster="poster.webp" shadow-intensity="1" src="animation.glb" alt="3D Model"></model-viewer>
 
   <script>
-    (() => {
-      const modelViewer = document.querySelector('#paused-change-demo');
-      
-      // Ждем загрузки модели
-      modelViewer.addEventListener('load', () => {
-        // Проверяем доступные анимации
-        console.log('Доступные анимации:', modelViewer.availableAnimations);
-        
-        // Запускаем переключение каждые 1.5 секунды
-        self.setInterval(() => {
-          modelViewer.animationName = modelViewer.animationName === 'Waiting' 
-            ? 'Running' 
-            : 'Waiting';
-          modelViewer.play();  // Явно запускаем анимацию
-        }, 1500.0);
-      });
-    })();
-  </script>
+                  (() => {
+                    const modelViewer = document.querySelector('#paused-change-demo');
+
+                    self.setInterval(() => {
+                      modelViewer.animationName = modelViewer.animationName === 'Running' ?
+                        'Waiting' : 'Running';
+                    }, 3000.0);
+                  })();
+                </script>
 </body>
 </html>
