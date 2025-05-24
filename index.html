@@ -27,10 +27,46 @@
 <body>
   <model-viewer reveal="auto" id="paused-change-demo" ar ar-modes="webxr scene-viewer quick-look" camera-controls touch-action="pan-y" autoplay animation-name="Running" poster="poster.webp" shadow-intensity="1" src="animation.glb" alt="3D Model">
     
-    <effect-composer>
-            <pixelate-effect granularity="10"></pixelate-effect>
+    <effect-composer render-mode="quality">
+      <pixelate-effect granularity="10"></pixelate-effect>
+      <bloom-effect blend-mode="skip"></bloom-effect>
+      <color-grade-effect blend-mode="default"></color-grade-effect>
+      <outline-effect color="blue" blend-mode="skip"></outline-effect>
+      <glitch-effect blend-mode="skip"></glitch-effect>
     </effect-composer>
 
+    <div class="controls glass">
+                    <div>
+                      <input type="checkbox" id="outline">
+                      <label for="outline">Outline Effect</label>
+                    </div>
+                    <div>
+                      <input type="checkbox" id="ssao">
+                      <label for="ssao">SSAO Effect</label>
+                    </div>
+                    <div>
+                      <input type="checkbox" id="glitch">
+                      <label for="glitch">Glitch Effect</label>
+                    </div>
+                    <div>
+                      <input type="checkbox" id="smaa">
+                      <label for="smaa">SMAA Effect</label>
+                    </div>
+                    <div>
+                      <input type="checkbox" id="bloom">
+                      <label for="bloom">Bloom Effect</label>
+                    </div>
+                    <div>
+                      <input type="checkbox" id="pixelate">
+                      <label for="pixelate">Pixelate Effect</label>
+                    </div>
+                    <div>
+                      <input type="checkbox" id="colorgrade" checked>
+                      <label for="colorgrade">Color Grade Effect</label>
+                    </div>
+                  </div>
+    </model-viewer>
+  
   <script>
     (() => {
       const modelViewer = document.querySelector('#paused-change-demo');
@@ -41,5 +77,15 @@
       }, 3000.0);
     })();
   </script>
+
+  <script type="module">
+                  const effectsViewer = document.querySelector("model-viewer#effectsViewer");
+                  const effects = effectsViewer.querySelector("effect-composer").children;
+                  const inputs = effectsViewer.querySelectorAll("input");
+
+                  for (let i = 0; i < effects.length; i++) {
+                    inputs[i].addEventListener('change', (e) => effects[i].blendMode = e.target.checked ? 'default' : 'skip');
+                  }
+                </script>
 </body>
 </html>
