@@ -2,7 +2,19 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+  <script async src="https://ga.jspm.io/npm:es-module-shims@1.7.1/dist/es-module-shims.js"></script>
+  <script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@^0.172.0/build/three.module.min.js"
+  }
+}
+</script>
+
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer-module.min.js"></script>
+
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer-effects/dist/model-viewer-effects.min.js"></script>
+  
   <style>
     body { margin: 0; }
     model-viewer {
@@ -14,7 +26,11 @@
   </style>
 </head>
 <body>
-  <model-viewer reveal="auto" id="paused-change-demo" ar ar-modes="webxr scene-viewer quick-look" camera-controls touch-action="pan-y" autoplay animation-name="Running" poster="poster.webp" shadow-intensity="1" src="animation.glb" alt="3D Model"></model-viewer>
+  <model-viewer reveal="auto" id="paused-change-demo" ar ar-modes="webxr scene-viewer quick-look" camera-controls touch-action="pan-y" autoplay animation-name="Running" poster="poster.webp" shadow-intensity="1" src="animation.glb" alt="3D Model">
+    <effect-composer>
+                    <pixelate-effect></pixelate-effect>
+                  </effect-composer>
+  </model-viewer>
 
   <script>
                   (() => {
