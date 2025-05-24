@@ -25,7 +25,7 @@
   </style>
 </head>
 <body>
-  <model-viewer reveal="auto" id="paused-change-demo" ar ar-modes="webxr scene-viewer quick-look" camera-controls touch-action="pan-y" autoplay animation-name="Running" poster="poster.webp" shadow-intensity="1" src="animation.glb" alt="3D Model">
+  <model-viewer reveal="auto" id="effectsViewer" ar ar-modes="webxr scene-viewer quick-look" camera-controls touch-action="pan-y" autoplay animation-name="Running" poster="poster.webp" shadow-intensity="1" src="animation.glb" alt="3D Model">
     
     <effect-composer render-mode="quality">
       <pixelate-effect granularity="10"></pixelate-effect>
@@ -69,7 +69,7 @@
   
   <script>
     (() => {
-      const modelViewer = document.querySelector('#paused-change-demo');
+      const modelViewer = document.querySelector('#effectsViewer');
       
       self.setInterval(() => {
         modelViewer.animationName = modelViewer.animationName === 'Running' ?
