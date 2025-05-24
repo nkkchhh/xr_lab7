@@ -79,13 +79,37 @@
   </script>
 
   <script type="module">
-                  const effectsViewer = document.querySelector("model-viewer#effectsViewer");
-                  const effects = effectsViewer.querySelector("effect-composer").children;
-                  const inputs = effectsViewer.querySelectorAll("input");
+                  document.addEventListener('DOMContentLoaded', () => {
+      const modelViewer = document.querySelector("model-viewer#effectsViewer");
+      const effectComposer = modelViewer.querySelector("effect-composer");
+      
+      // Соответствие чекбоксов и эффектов
+      const effectMap = {
+        outline: 'outline-effect',
+        ssao: 'ssao-effect',
+        glitch: 'glitch-effect',
+        smaa: 'smaa-effect',
+        bloom: 'bloom-effect',
+        pixelate: 'pixelate-effect',
+        colorgrade: 'color-grade-effect'
+      };
 
-                  for (let i = 0; i < effects.length; i++) {
-                    inputs[i].addEventListener('change', (e) => effects[i].blendMode = e.target.checked ? 'default' : 'skip');
-                  }
-                </script>
+      // Инициализация управления эффектами
+      Object.entries(effectMap).forEach(([checkboxId, effectId]) => {
+        const checkbox = document.getElementById(checkboxId);
+        const effect = document.getElementById(effectId);
+        
+        if (checkbox && effect) {
+          // Установка начального состояния
+          effect.disabled = !checkbox.checked;
+          
+          // Обработчик изменения
+          checkbox.addEventListener('change', (e) => {
+            effect.disabled = !e.target.checked;
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
