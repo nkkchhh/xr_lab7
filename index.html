@@ -2,9 +2,28 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Используем полную версию, а не module -->
-  <script src="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@google/model-viewer-effects/dist/model-viewer-effects.min.js"></script>
+  <script type="module">
+    import '@google/model-viewer/dist/model-viewer.min.js';
+    import { EffectComposer, PixelateEffect } from '@google/model-viewer-effects';
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      const modelViewer = document.querySelector('#paused-change-demo');
+      
+      // Инициализация эффектов
+      modelViewer.addEventListener('load', () => {
+        const composer = new EffectComposer([
+          new PixelateEffect({ granularity: 10 })
+        ]);
+        modelViewer.modelViewerEffects = composer;
+      });
+      
+      // Переключение анимаций
+      setInterval(() => {
+        modelViewer.animationName = modelViewer.animationName === 'Running' ?
+          'Waiting' : 'Running';
+      }, 3000);
+    });
+  </script>
   
   <style>
     body { margin: 0; }
@@ -15,22 +34,13 @@
   </style>
 </head>
 <body>
-  <model-viewer reveal="auto" id="paused-change-demo" ar ar-modes="webxr scene-viewer quick-look" camera-controls touch-action="pan-y" autoplay animation-name="Running" poster="poster.webp" shadow-intensity="1" src="animation.glb" alt="3D Model">
-    
-    <effect-composer>
-      <pixelate-effect granularity="10"></pixelate-effect>
-    </effect-composer>
+  <model-viewer 
+    id="paused-change-demo"
+    autoplay
+    animation-name="Running"
+    src="animation.glb"
+    camera-controls
+    shadow-intensity="1">
   </model-viewer>
-
-  <script>
-    (() => {
-      const modelViewer = document.querySelector('#paused-change-demo');
-      
-      self.setInterval(() => {
-        modelViewer.animationName = modelViewer.animationName === 'Running' ?
-          'Waiting' : 'Running';
-      }, 3000.0);
-    })();
-  </script>
 </body>
 </html>
